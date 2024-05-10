@@ -18,8 +18,9 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->string('cpf');
             $table->string('telefone');
-            $table->foreignIdFor(Escolaridade::class)->constrained();
+            $table->foreignIdFor(Escolaridade::class)->nullable()->constrained();
             $table->integer('nota_enem')->nullable();
+            $table->boolean('aprovado')->default(0);
             $table->timestamps();
         });
     }

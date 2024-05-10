@@ -10,12 +10,17 @@ class Prova extends Model
     use HasFactory;
 
     protected $fillable = [
-        'professor_id',
+        'instituicao_id',
         'nome',
         'informacoes',
+        'ativada'
     ];
 
-    public function professor() {
-        return $this->belongsTo(Professor::class);
+    public function instituicoes() {
+        return $this->belongsTo(Instituicao::class);
+    }
+
+    public function questoes() {
+        return $this->hasMany(Questao::class);
     }
 }

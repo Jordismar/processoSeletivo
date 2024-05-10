@@ -28,6 +28,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();
+        $aluno = $user->aluno;
+        if ($user->getRoleNames()[0] == 'aluno') {
+            if ($aluno->aprovado == 1) {
+                if ($aluno->escolaridade_id != 1) {
+                    return redirect()->intended(route('matricula', absolute: false));
+                }
+                return redirect()->intended(route('aprovado', absolute: false));
+            } else {
+                return redirect()->intended(route('vestibular', absolute: false));
+            }
+        }
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

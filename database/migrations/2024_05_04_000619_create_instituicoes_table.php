@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Instituicao;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -12,12 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('provas', function (Blueprint $table) {
+        Schema::create('instituicoes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Instituicao::class)->constrained('instituicoes');
-            $table->string('nome');
-            $table->string('informacoes')->nullable();
-            $table->boolean('ativada')->default(0);
+            $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('provas');
+        Schema::dropIfExists('instituicoes');
     }
 };
